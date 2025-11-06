@@ -4,6 +4,8 @@ import Quickshell
 import Quickshell.Io
 import Quickshell.Widgets
 
+import qs.config
+
 Scope {
     id: root
 
@@ -33,7 +35,7 @@ Scope {
         onTriggered: root.shouldShowOsd = false
     }
 
-    property bool shouldShowOsd: false
+    property bool shouldShowOsd: true
     property int maxBrightness: parseInt(maxBrightnessFile.text())
     property int brightness: 0
     property int percentage: (brightness / maxBrightness) * 100
@@ -46,8 +48,8 @@ Scope {
             margins.bottom: screen.height / 5
             exclusiveZone: 0
 
-            implicitWidth: 300
-            implicitHeight: 50
+            implicitWidth: Fonts.regularSize * 24
+            implicitHeight: Fonts.regularSize * 4
 
             color: "transparent"
 
@@ -56,23 +58,21 @@ Scope {
             Rectangle {
                 anchors.fill: parent
 
-                color: "#1e1e2e"
+                color: Colors.base
 
-                radius: 6
-                border.color: "#ff11111b"
-                border.width: 2
+                radius: Decorations.borderRadius
+                border.color: Colors.border
+                border.width: Decorations.borderWidth
 
                 RowLayout {
-                    anchors {
-                        fill: parent
-                        leftMargin: 20
-                        rightMargin: 20
-                    }
+                    anchors.fill: parent
+                    anchors.leftMargin: Fonts.regularSize * 2
+                    anchors.rightMargin: Fonts.regularSize * 2
 
-                    spacing: 18
+                    spacing: Fonts.regularSize
 
                     Rectangle {
-                        width: 24
+                        width: Fonts.regularSize * 2
 
                         Text {
                             id: icontext
@@ -80,17 +80,17 @@ Scope {
 
 							text: '󰃠'
 
-                            color: '#ffcdd6f4'
-                            font.pixelSize: 20
+                            color: Colors.lightblue
+                            font.pixelSize: Fonts.regularSize * 1.5
                         }
                     }
 
                     Rectangle {
                         Layout.fillWidth: true
 
-                        implicitHeight: 8
-                        radius: 20
-                        color: "#aa6c7086"
+                        implicitHeight: Fonts.regularSize / 2
+                        radius: implicitHeight / 4
+                        color: Colors.surface
 
                         Rectangle {
                             id: fillrect
@@ -100,7 +100,7 @@ Scope {
                                 bottom: parent.bottom
                             }
 
-                            color: '#ffcdd6f4'
+                            color: Colors.text
 
                             implicitWidth: parent.width * (percentage / 100)
                             radius: parent.radius
