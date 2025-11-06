@@ -52,7 +52,7 @@ Scope {
                     anchors.verticalCenter: parent.verticalCenter
                     anchors.leftMargin: 5
 
-                    Workspaces {}
+                    BarWorkspaces {}
                 }
 
                 Row {
@@ -69,9 +69,10 @@ Scope {
 
                     spacing: 10
                     
+                    Time {}
+                    BinaryClock {}
+                    Battery {}
                     // MusicPlayer {}
-                    // Time {}
-                    // Battery {}
                 }
                 Rectangle {
                     anchors.fill: barRight
