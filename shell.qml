@@ -14,6 +14,6 @@ ShellRoot {
 	}
 	Loader {
 		active: true
-		source: "modules/osd/shell.qml"
+		source: "modules/osd/OnScreenDisplay.qml"
 	}
 }

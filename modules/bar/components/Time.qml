@@ -29,9 +29,6 @@ Item {
             id: dataProc
 
             command: ['date', '+%H:%M']
-            // command: ['expr', "$(date +%S) / 10"]
-            // command: ["expr $(date '+%S') / 10"]
-            // command: ['sh', '-c', 'expr $(date +%S) % 10']
             running: true
 
             stdout: StdioCollector {
