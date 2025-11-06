@@ -12,13 +12,13 @@ Rectangle {
 
     FontLoader {
         id: fjallaOne
-        source: "assets/FjallaOne-Regular.ttf"
+        source: "../assets/FjallaOne-Regular.ttf"
     }
 
     Image {
         id: image
         anchors.fill: parent
-        source: "assets/wallpaper_layer_0.png"
+        source: "../assets/wallpaper_layer_0.png"
     }
 
     MultiEffect {
@@ -169,7 +169,7 @@ Rectangle {
 
     Image {
         anchors.fill: parent
-        source: "assets/wallpaper_layer_1.png"
+        source: "../assets/wallpaper_layer_1.png"
     }
 
     // Button {
