@@ -4,6 +4,8 @@ import Quickshell
 import Quickshell.Services.Pipewire
 import Quickshell.Widgets
 
+import qs.config
+
 Scope {
     id: root
 
@@ -40,8 +42,8 @@ Scope {
             margins.bottom: screen.height / 5
             exclusiveZone: 0
 
-            implicitWidth: 300
-            implicitHeight: 50
+            implicitWidth: Fonts.regularSize * 24
+            implicitHeight: Fonts.regularSize * 4
 
             color: "transparent"
 
@@ -50,27 +52,27 @@ Scope {
             Rectangle {
                 anchors.fill: parent
 
-                color: "#1e1e2e"
+                color: Colors.base
 
-                radius: 6
-                border.color: "#ff11111b"
-                border.width: 2
+                radius: Decorations.borderRadius
+                border.color: Colors.border
+                border.width: Decorations.borderWidth
 
                 RowLayout {
-                    anchors {
-                        fill: parent
-                        leftMargin: 20
-                        rightMargin: 20
-                    }
+                    anchors.fill: parent
+                    anchors.leftMargin: Fonts.regularSize * 2
+                    anchors.rightMargin: Fonts.regularSize * 2
 
-                    spacing: 18
+                    spacing: Fonts.regularSize
 
                     Rectangle {
-                        width: 24
+                        width: Fonts.regularSize * 2
 
                         Text {
                             id: icontext
                             anchors.verticalCenter: parent.verticalCenter
+
+                            font.pixelSize: Fonts.regularSize * 1.5
 
                             text: {
                                 if (Pipewire.defaultAudioSink?.audio.muted) {
@@ -84,23 +86,20 @@ Scope {
                                 }
                             }
 
-                            color: '#ffcdd6f4'
-                            font.pixelSize: 20
-
                             state: Pipewire.defaultAudioSink?.audio.muted ? "MUTED" : "NEUTRAL"
                             states: [
                                 State {
                                     name: "MUTED"
                                     PropertyChanges {
                                         target: icontext
-                                        color: "#ff585b70"
+                                        color: Colors.subtext
                                     }
                                 },
                                 State {
                                     name: "NEUTRAL"
                                     PropertyChanges {
                                         target: icontext
-                                        color: "#ffcdd6f4"
+                                        color: Colors.lightblue
                                     }
                                 }
                             ]
@@ -110,7 +109,7 @@ Scope {
                                     to: "MUTED"
                                     ColorAnimation {
                                         target: icontext
-                                        duration: 50
+                                        duration: Decorations.animation0Speed
                                     }
                                 },
                                 Transition {
@@ -118,7 +117,7 @@ Scope {
                                     to: "NEUTRAL"
                                     ColorAnimation {
                                         target: icontext
-                                        duration: 50
+                                        duration: Decorations.animation0Speed
                                     }
                                 }
                             ]
@@ -128,9 +127,9 @@ Scope {
                     Rectangle {
                         Layout.fillWidth: true
 
-                        implicitHeight: 8
-                        radius: 20
-                        color: "#aa6c7086"
+                        implicitHeight: Fonts.regularSize / 2
+                        radius: implicitHeight / 4
+                        color: Colors.surface
 
                         Rectangle {
                             id: fillrect
@@ -139,8 +138,6 @@ Scope {
                                 top: parent.top
                                 bottom: parent.bottom
                             }
-
-                            color: '#ffcdd6f4'
 
                             implicitWidth: parent.width * ((Pipewire.defaultAudioSink?.audio.volume > 1 ? 1.0 : Pipewire.defaultAudioSink?.audio.volume) ?? 0)
                             radius: parent.radius
@@ -151,14 +148,14 @@ Scope {
                                     name: "RED"
                                     PropertyChanges {
                                         target: fillrect
-                                        color: "#fff2cdcd"
+                                        color: Colors.red
                                     }
                                 },
                                 State {
                                     name: "NEUTRAL"
                                     PropertyChanges {
                                         target: fillrect
-                                        color: "#ffcdd6f4"
+                                        color: Colors.text
                                     }
                                 }
                             ]
@@ -168,7 +165,7 @@ Scope {
                                     to: "RED"
                                     ColorAnimation {
                                         target: fillrect
-                                        duration: 200
+                                        duration: Decorations.animation0Speed
                                     }
                                 },
                                 Transition {
@@ -176,7 +173,7 @@ Scope {
                                     to: "NEUTRAL"
                                     ColorAnimation {
                                         target: fillrect
-                                        duration: 200
+                                        duration: Decorations.animation0Speed
                                     }
                                 }
                             ]

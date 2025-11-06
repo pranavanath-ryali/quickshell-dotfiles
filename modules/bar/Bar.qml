@@ -4,6 +4,8 @@ import Quickshell
 import Quickshell.Io
 import Quickshell.Hyprland
 
+import qs.config
+
 import "./components"
 
 Scope {
@@ -68,7 +70,7 @@ Scope {
                     height: parent.height
 
                     spacing: 10
-                    
+
                     Time {}
                     BinaryClock {}
                     Battery {}
