@@ -142,7 +142,7 @@ Scope {
 
                             color: '#ffcdd6f4'
 
-                            implicitWidth: parent.width * (Pipewire.defaultAudioSink?.audio.volume ?? 0)
+                            implicitWidth: parent.width * ((Pipewire.defaultAudioSink?.audio.volume > 1 ? 1.0 : Pipewire.defaultAudioSink?.audio.volume) ?? 0)
                             radius: parent.radius
 
                             state: Pipewire.defaultAudioSink?.audio.volume > 1 ? "RED" : "NEUTRAL"
