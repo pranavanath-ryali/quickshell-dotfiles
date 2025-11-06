@@ -10,33 +10,8 @@ import qs.services
 Scope {
     id: root
 
-    PwObjectTracker {
-        objects: [Pipewire.defaultAudioSink]
-    }
-
-    Connections {
-        target: Pipewire.defaultAudioSink?.audio
-
-        function onVolumeChanged() {
-            root.shouldShowOsd = true;
-            hideTimer.restart();
-        }
-
-        function onMutedChanged() {
-            root.shouldShowOsd = true;
-            hideTimer.restart();
-        }
-    }
-    property bool shouldShowOsd: false
-
-    Timer {
-        id: hideTimer
-        interval: 1000
-        onTriggered: root.shouldShowOsd = false
-    }
-
     LazyLoader {
-        active: root.shouldShowOsd
+        active: VolumeService.shouldShowOsd
 
         PanelWindow {
             anchors.bottom: true
@@ -72,24 +47,11 @@ Scope {
                         Text {
                             id: icontext
                             anchors.verticalCenter: parent.verticalCenter
-
                             font.pixelSize: Fonts.regularSize * 1.5
-
-                            // text: {
-                            //     if (Pipewire.defaultAudioSink?.audio.muted) {
-                            //         return '';
-                            //     } else if (Pipewire.defaultAudioSink?.audio.volume * 100 <= 25) {
-                            //         return '';
-                            //     } else if (Pipewire.defaultAudioSink?.audio.volume * 100 <= 50) {
-                            //         return '';
-                            //     } else {
-                            //         return '';
-                            //     }
-                            // }
 
                             text: VolumeService.icon
 
-                            state: Pipewire.defaultAudioSink?.audio.muted ? "MUTED" : "NEUTRAL"
+                            state: VolumeService.muted ? "MUTED" : "NEUTRAL"
                             states: [
                                 State {
                                     name: "MUTED"
@@ -142,10 +104,10 @@ Scope {
                                 bottom: parent.bottom
                             }
 
-                            implicitWidth: parent.width * ((Pipewire.defaultAudioSink?.audio.volume > 1 ? 1.0 : Pipewire.defaultAudioSink?.audio.volume) ?? 0)
+                            implicitWidth: parent.width * (VolumeService.volume > 100 ? 1 : VolumeService.volume / 100)
                             radius: parent.radius
 
-                            state: Pipewire.defaultAudioSink?.audio.volume > 1 ? "RED" : "NEUTRAL"
+                            state: VolumeService.volume > 100 ? "RED" : "NEUTRAL"
                             states: [
                                 State {
                                     name: "RED"

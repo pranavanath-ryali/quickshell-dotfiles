@@ -18,14 +18,14 @@ Singleton {
     }
 
     function updateValues() {
-        root.volume = Pipewire.defaultAudioSink?.audio.volume;
+        root.volume = Pipewire.defaultAudioSink?.audio.volume * 100;
         root.muted = Pipewire.defaultAudioSink?.audio.muted;
 
-        if (Pipewire.defaultAudioSink?.audio.muted) {
+        if (root.muted) {
             root.icon = "";
-        } else if (Pipewire.defaultAudioSink?.audio.volume * 100 <= 25) {
+        } else if (root.volume <= 25) {
             root.icon = "";
-        } else if (Pipewire.defaultAudioSink?.audio.volume * 100 <= 50) {
+        } else if (root.volume <= 50) {
             root.icon = "";
         } else {
             root.icon = "";
