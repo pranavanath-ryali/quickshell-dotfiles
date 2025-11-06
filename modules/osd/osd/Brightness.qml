@@ -5,43 +5,13 @@ import Quickshell.Io
 import Quickshell.Widgets
 
 import qs.config
+import qs.services
 
 Scope {
     id: root
 
-    FileView {
-        id: maxBrightnessFile
-        path: "/sys/class/backlight/intel_backlight/max_brightness"
-    }
-
-    FileView {
-        id: brightnessFile
-        path: "/sys/class/backlight/intel_backlight/brightness"
-
-        onLoaded: brightness = parseInt(this.text())
-
-        watchChanges: true
-        onFileChanged: {
-            brightness = parseInt(this.text());
-            root.shouldShowOsd = true;
-            hideTimer.restart();
-            this.reload();
-        }
-    }
-
-    Timer {
-        id: hideTimer
-        interval: 1000
-        onTriggered: root.shouldShowOsd = false
-    }
-
-    property bool shouldShowOsd: false
-    property int maxBrightness: parseInt(maxBrightnessFile.text())
-    property int brightness: 0
-    property int percentage: (brightness / maxBrightness) * 100
-
     LazyLoader {
-        active: root.shouldShowOsd
+        active: BrightnessService.shouldShowOsd
 
         PanelWindow {
             anchors.bottom: true
@@ -102,7 +72,7 @@ Scope {
 
                             color: Colors.text
 
-                            implicitWidth: parent.width * (percentage / 100)
+                            implicitWidth: parent.width * (BrightnessService.percentage / 100)
                             radius: parent.radius
                         }
                     }
