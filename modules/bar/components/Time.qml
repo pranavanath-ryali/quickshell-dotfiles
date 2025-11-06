@@ -2,6 +2,8 @@ import Quickshell
 import Quickshell.Io
 import QtQuick
 
+import qs.config
+
 Item {
     id: workspacesClock
     visible: true
@@ -20,10 +22,8 @@ Item {
 
         color: "#cdd6f4"
 
-        font {
-            weight: 800
-            pixelSize: 16
-        }
+        font.weight: Fonts.boldWeight
+        font.pixelSize: Fonts.boldSize
 
         Process {
             id: dataProc
