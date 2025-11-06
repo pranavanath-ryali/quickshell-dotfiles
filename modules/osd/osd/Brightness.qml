@@ -35,7 +35,7 @@ Scope {
         onTriggered: root.shouldShowOsd = false
     }
 
-    property bool shouldShowOsd: true
+    property bool shouldShowOsd: false
     property int maxBrightness: parseInt(maxBrightnessFile.text())
     property int brightness: 0
     property int percentage: (brightness / maxBrightness) * 100

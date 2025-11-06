@@ -5,6 +5,7 @@ import Quickshell.Services.Pipewire
 import Quickshell.Widgets
 
 import qs.config
+import qs.services
 
 Scope {
     id: root
@@ -74,17 +75,19 @@ Scope {
 
                             font.pixelSize: Fonts.regularSize * 1.5
 
-                            text: {
-                                if (Pipewire.defaultAudioSink?.audio.muted) {
-                                    return '';
-                                } else if (Pipewire.defaultAudioSink?.audio.volume * 100 <= 25) {
-                                    return '';
-                                } else if (Pipewire.defaultAudioSink?.audio.volume * 100 <= 50) {
-                                    return '';
-                                } else {
-                                    return '';
-                                }
-                            }
+                            // text: {
+                            //     if (Pipewire.defaultAudioSink?.audio.muted) {
+                            //         return '';
+                            //     } else if (Pipewire.defaultAudioSink?.audio.volume * 100 <= 25) {
+                            //         return '';
+                            //     } else if (Pipewire.defaultAudioSink?.audio.volume * 100 <= 50) {
+                            //         return '';
+                            //     } else {
+                            //         return '';
+                            //     }
+                            // }
+
+                            text: VolumeService.icon
 
                             state: Pipewire.defaultAudioSink?.audio.muted ? "MUTED" : "NEUTRAL"
                             states: [

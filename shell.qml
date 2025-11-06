@@ -5,7 +5,6 @@ import QtQuick
 
 import "./modules/bar"
 import "./modules/osd"
-import "./config/Colors.qml"
 
 ShellRoot {
 	id: root
