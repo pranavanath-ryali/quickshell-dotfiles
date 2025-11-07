@@ -36,16 +36,15 @@ Scope {
 
                 RowLayout {
                     anchors.fill: parent
-                    anchors.leftMargin: Fonts.regularSize * 2
+                    anchors.leftMargin: Fonts.regularSize * 1.5
                     anchors.rightMargin: Fonts.regularSize * 2
 
-                    spacing: Fonts.regularSize
-
                     Rectangle {
-                        width: Fonts.regularSize * 2
+                        id: volumeIconRect
+                        width: Fonts.regularSize * 2.5
 
                         Text {
-                            id: icontext
+                            id: volumeIconText
                             anchors.verticalCenter: parent.verticalCenter
                             font.pixelSize: Fonts.regularSize * 1.5
 
@@ -56,14 +55,14 @@ Scope {
                                 State {
                                     name: "MUTED"
                                     PropertyChanges {
-                                        target: icontext
+                                        target: volumeIconText
                                         color: Colors.subtext
                                     }
                                 },
                                 State {
                                     name: "NEUTRAL"
                                     PropertyChanges {
-                                        target: icontext
+                                        target: volumeIconText
                                         color: Colors.lightblue
                                     }
                                 }
@@ -73,7 +72,7 @@ Scope {
                                     from: "*"
                                     to: "MUTED"
                                     ColorAnimation {
-                                        target: icontext
+                                        target: volumeIconText
                                         duration: Decorations.animation0Speed
                                     }
                                 },
@@ -81,7 +80,7 @@ Scope {
                                     from: "*"
                                     to: "NEUTRAL"
                                     ColorAnimation {
-                                        target: icontext
+                                        target: volumeIconText
                                         duration: Decorations.animation0Speed
                                     }
                                 }
@@ -90,6 +89,7 @@ Scope {
                     }
 
                     Rectangle {
+                        id: volumeSlider
                         Layout.fillWidth: true
 
                         implicitHeight: Fonts.regularSize / 2
@@ -104,7 +104,7 @@ Scope {
                                 bottom: parent.bottom
                             }
 
-                            implicitWidth: parent.width * (VolumeService.volume > 100 ? 1 : VolumeService.volume / 100)
+                            implicitWidth: parent.width * (VolumeService.volume > 100 ? (VolumeService.volume - 100) / 100 : VolumeService.volume / 100)
                             radius: parent.radius
 
                             state: VolumeService.volume > 100 ? "RED" : "NEUTRAL"
@@ -144,6 +144,58 @@ Scope {
                             ]
                         }
                     }
+
+                    // Rectangle {
+                    //     id: volumeValueRect
+                    //     Layout.alignment: Qt.AlignRight
+                    //     width: 100
+                    //     height: parent.height
+                    //
+                    //     Text {
+                    //         anchors.verticalCenter: parent.verticalCenter
+                    //         text: VolumeService.volume
+                    //     }
+                    //
+                    //     state: VolumeService.volume > 100 ? "SHOW" : "NEUTRAL"
+                    //     states: [
+                    //         State {
+                    //             name: "SHOW"
+                    //             PropertyChanges {
+                    //                 target: volumeValueRect
+                    //                 width: 50
+                    //             }
+                    //         },
+                    //         State {
+                    //             name: "NEUTRAL"
+                    //             PropertyChanges {
+                    //                 target: volumeValueRect
+                    //                 width: 0
+                    //             }
+                    //         }
+                    //     ]
+                    //     transitions: [
+                    //         Transition {
+                    //             from: "*"
+                    //             to: "SHOW"
+                    //             NumberAnimation {
+                    //                 target: volumeValueRect
+                    //                 properties: "width"
+                    //                 easing.type: Easing.InOutElastic
+                    //                 duration: 100
+                    //             }
+                    //         },
+                    //         Transition {
+                    //             from: "*"
+                    //             to: "NEUTRAL"
+                    //             NumberAnimation {
+                    //                 target: volumeValueRect
+                    //                 properties: "width"
+                    //                 easing.type: Easing.InOutElastic
+                    //                 duration: 100
+                    //             }
+                    //         }
+                    //     ]
+                    // }
                 }
             }
         }
