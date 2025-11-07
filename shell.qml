@@ -3,21 +3,12 @@
 import Quickshell
 import QtQuick
 
-import "./modules/bar"
-import "./modules/osd"
+import "./widgets/bar"
+import "./widgets/osd"
 
 ShellRoot {
 	id: root
 
 	Bar {}
 	OnScreenDisplay {}
-
-	// Loader {
-	// 	active: true
-	// 	source: "modules/bar/Bar.qml"
-	// }
-	// Loader {
-	// 	active: true
-	// 	source: "modules/osd/OnScreenDisplay.qml"
-	// }
 }
