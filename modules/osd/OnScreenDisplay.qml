@@ -1,13 +1,9 @@
 import Quickshell
 import QtQuick
 
+import "./osd"
+
 Scope {
-    Loader {
-        active: true
-        source: "./osd/Volume.qml"
-    }
-    Loader {
-        active: true
-        source: "./osd/Brightness.qml"
-    }
+    Volume {}
+    Brightness {}
 }
