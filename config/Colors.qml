@@ -5,6 +5,7 @@ import Quickshell
 Singleton {
 	readonly property var base: "#ff1e1e2e"
 	readonly property var border: "#ff181825"
+	readonly property var barBorder: "#aa7f849c"
 
 	readonly property var surface: "#ff313244"
 

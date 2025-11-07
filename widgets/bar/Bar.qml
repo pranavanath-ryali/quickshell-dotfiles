@@ -7,9 +7,11 @@ import Quickshell.Hyprland
 import qs.config
 
 import "./components"
+import "../calendar"
 
 Scope {
-    id: root
+
+    property bool showCalendar: false
 
     PanelWindow {
         id: panel
@@ -22,7 +24,7 @@ Scope {
         aboveWindows: true
 
         implicitWidth: screen.width
-        implicitHeight: 40
+        implicitHeight: Fonts.regularSize * 3.5
 
         color: "transparent"
 
@@ -33,17 +35,17 @@ Scope {
             Rectangle {
                 id: bar
 
-                x: 6
-                y: 6
+                x: Decorations.barPositionX
+                y: Decorations.barPositionY
 
-                width: parent.width - 12
-                height: parent.height - 4
+                width: parent.width - (Decorations.barPositionX * 2)
+                height: parent.height - Decorations.barPositionY
 
-                color: "#1e1e2e"
-                radius: 6
+                color: Colors.base
 
-                border.color: "#1e11111b"
-                border.width: 2
+                radius: Decorations.borderRadius
+                border.color: Colors.barBorder
+                border.width: Decorations.borderWidth
 
                 Row {
                     id: barLeft
@@ -52,7 +54,7 @@ Scope {
 
                     anchors.left: parent.left
                     anchors.verticalCenter: parent.verticalCenter
-                    anchors.leftMargin: 5
+                    anchors.leftMargin: Fonts.regularSize
 
                     BarWorkspaces {}
                 }
@@ -64,35 +66,24 @@ Scope {
 
                     anchors.right: parent.right
                     anchors.verticalCenter: parent.verticalCenter
-                    anchors.rightMargin: 5
+                    anchors.rightMargin: Fonts.regularSize
 
                     width: panel.width / 3
                     height: parent.height
 
-                    spacing: 10
+                    spacing: Fonts.regularSize
 
                     Time {}
-                    BinaryClock {}
                     Battery {}
-                    // MusicPlayer {}
                 }
-                Rectangle {
-                    anchors.fill: barRight
-                    color: "transparent"
-                }
-            }
-
-            MultiEffect {
-                anchors.fill: bar
-                source: bar
-
-                shadowEnabled: false
-                shadowOpacity: 1.0
-                shadowColor: "#ff000000"
-                shadowScale: 1.0
-                shadowHorizontalOffset: 0
-                shadowVerticalOffset: 0
             }
         }
     }
+
+    // LazyLoader {
+    //     id: calendarPopup
+    //     active: bar.showCalendar
+    //
+    //     CalendarPopup {}
+    // }
 }

@@ -1,31 +1,35 @@
 import QtQuick
 import Quickshell
 import Quickshell.Io
-import Quickshell.Hyprland
+
+import qs.config
+import qs.services
 
 Row {
     id: workspacesRow
-    spacing: 6
+    spacing: Fonts.regularSize
 
     Repeater {
-        model: Hyprland.workspaces
+        model: Workspaces.workspaces
 
         Rectangle {
             required property var modelData
 
             visible: modelData.id >= 0
+
             width: 3 * bar.height / 4
             height: 3 * bar.height / 4
-            radius: 4
-            // color: modelData.active ? "red" : "black"
             color: "transparent"
 
             MouseArea {
                 anchors.fill: parent
-                onClicked: Hyprland.dispatch("workspace " + modelData.id)
+                onClicked: Workspaces.dispatch(modelData.id)
             }
 
             Text {
+                anchors.centerIn: parent
+                font.pixelSize: Fonts.regularSize
+
                 text: {
                     if (modelData.id === 1) {
                         return "I";
@@ -43,21 +47,14 @@ Row {
                         return "VII";
                     }
                 }
-                anchors.centerIn: parent
 
-                // color: modelData.active ? "white" : "gray"
                 color: {
-                    if (modelData.active) {
-                        return "white";
-                    // } else if (occupied) {
-                    //     return "gray";
+                    if (modelData.toplevels.values.length > 0) {
+                        return Colors.text;
                     } else {
-                        return "gray";
+                        return Colors.subtext;
                     }
                 }
-
-                font.family: "monospace"
-                font.pixelSize: 12
             }
         }
     }
