@@ -7,7 +7,7 @@ import Quickshell.Hyprland
 import qs.config
 
 import "./components"
-import "../../modules"
+import "../calendar"
 
 Scope {
     id: bar
@@ -84,6 +84,6 @@ Scope {
         id: calendarPopup
         active: bar.showCalendar
         
-        CalendarPopup {}
+        CalendarWidget {}
     }
 }
