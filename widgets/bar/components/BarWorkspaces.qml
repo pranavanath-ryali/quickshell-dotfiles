@@ -17,8 +17,8 @@ Row {
 
             visible: modelData.id >= 0
 
-            width: 3 * bar.height / 4
-            height: 3 * bar.height / 4
+            width: 3 * barRect.height / 4
+            height: 3 * barRect.height / 4
             color: "transparent"
 
             MouseArea {
@@ -50,7 +50,7 @@ Row {
 
                 color: {
                     if (modelData.toplevels.values.length > 0) {
-                        return Colors.text;
+                        return Colors.blue;
                     } else {
                         return Colors.subtext;
                     }

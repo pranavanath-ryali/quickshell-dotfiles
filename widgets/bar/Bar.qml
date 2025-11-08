@@ -7,10 +7,10 @@ import Quickshell.Hyprland
 import qs.config
 
 import "./components"
-import "../calendar"
+import "../../modules"
 
 Scope {
-
+    id: bar
     property bool showCalendar: false
 
     PanelWindow {
@@ -33,7 +33,7 @@ Scope {
             height: panel.height
 
             Rectangle {
-                id: bar
+                id: barRect
 
                 x: Decorations.barPositionX
                 y: Decorations.barPositionY
@@ -80,10 +80,10 @@ Scope {
         }
     }
 
-    // LazyLoader {
-    //     id: calendarPopup
-    //     active: bar.showCalendar
-    //
-    //     CalendarPopup {}
-    // }
+    LazyLoader {
+        id: calendarPopup
+        active: bar.showCalendar
+        
+        CalendarPopup {}
+    }
 }
