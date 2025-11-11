@@ -57,6 +57,7 @@ Scope {
                     anchors.leftMargin: Fonts.regularSize
 
                     BarWorkspaces {}
+                    MusicPlayer {}
                 }
 
                 Row {

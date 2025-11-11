@@ -10,8 +10,8 @@ import "../../modules"
 PanelWindow {
     id: root
 
-    implicitWidth: 300
-    implicitHeight: 400
+    implicitWidth: Fonts.regularSize * 30
+    implicitHeight: Fonts.regularSize * 40
 
     anchors.top: true
     anchors.right: true
@@ -20,6 +20,7 @@ PanelWindow {
 
     SectionRectangle {
         anchors.fill: parent
+        anchors.margins: Decorations.barPositionX
 
         color: Colors.base
         border.color: Colors.lightblue

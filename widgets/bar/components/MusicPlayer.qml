@@ -1,16 +1,28 @@
-import QtQuick
 import Quickshell
+import Quickshell.Io
 import Quickshell.Services.Mpris
+import QtQuick
 
-Item {
-    implicitWidth: 100
-    implicitHeight: parent.height
-    Rectangle {
-        anchors.fill: parent
-        color: red
+Rectangle {
+    width: 1000
+    height: parent.height
+
+    color: "black"
+
+    Process {
+        running: true
+        command: ["python3", "scripts/mpd.py"]
+        stdout: StdioCollector {
+            onStreamFinished: player.text = this.text
+        }
     }
 
     Text {
-        text: 'BURH'
+        id: player
+        required property var modelData
+
+        text: modelData.dbusName
+
+        color: "white"
     }
 }

@@ -1,4 +1,5 @@
 .direnv/
+__pycache__/
 
 .qmlls.ini
 .envrc

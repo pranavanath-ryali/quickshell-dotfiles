@@ -91,6 +91,7 @@
                             enable = true;
                             servers = {
                                 qmlls.enable = true;
+                                pyright.enable = true;
                             };
                         };
 
@@ -428,15 +429,13 @@
 
                         quickshell.packages.${system}.default
 
-                        # quickshell           # the main shell toolkit
                         qt6.full             # provides QtQuick, QtDeclarative, etc.
-                        # qt6.qttools          # Qt Designer, linguist, etc.
-                        # qt6.qtdeclarative    # for QML modules
-                        # qt6.qtwayland        # Wayland support
-                        qtcreator            # optional: full IDE
                         glib                 # for DBus/system integration
                         dbus
-                        # git
+
+                        python313
+                        python313Packages.mpd2
+                        python313Packages.pillow
                     ] ++ [ nixvimConfig ];
 
                     QML_IMPORT_PATH = "${pkgs.quickshell}/bin/quickshell";
